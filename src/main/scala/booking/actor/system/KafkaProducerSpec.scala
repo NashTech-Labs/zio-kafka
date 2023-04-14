@@ -13,7 +13,7 @@ object KafkaProducerSpec extends ZIOAppDefault {
     val message = new ProducerRecord(
       KafkaTopics.KAFKA_TOPIC_BOOKING_REQUEST,
       0,
-      BookingMessage(Booking("1", "april 11, 2023", "PVR", "NewDelhi", "B4 B5", 1, 2, 3, 4, Some(""), Some("")))
+      BookingMessage(Booking("1", "april 11, 2023", "PVR", "NewDelhi", "Avatar", "15:00", "B4 B5", 1, 2, 3, 4, Some(""), Some("")))
     )
 
     ZStream

@@ -16,7 +16,7 @@ object KafkaConsumerSpec extends ZIOAppDefault {
         .plainStream(BookingSerde.key, BookingSerde.value)
         .tap { comRec =>
           val ticketBooking = comRec.value
-          zio.Console.printLine("Ticket booking response "+ticketBooking)
+          ZIO.logInfo("Ticket booking response "+ticketBooking)
 
         }
         .map(_.offset)

@@ -14,7 +14,7 @@ object ThreatreActor {
       msg match {
         case BookingMessage(value) => {
           ZIO.logInfo("ThreatreActor ................" + value)
-          val ticketConfirm= Booking(value.uuid, value.bookingDate, value.theatreName, value.theatreLocation, value.seatNumbers, value.cardNumber, value.pin,
+          val ticketConfirm= Booking(value.uuid, value.bookingDate, value.theatreName, value.theatreLocation, value.movieName, value.showTimings, value.seatNumbers, value.cardNumber, value.pin,
             value.cvv, value.otp, Some("Success"), Some("Confirmed"))
           for{
             paymentActor <- actorSystem.flatMap(x => x.make("paymentGatewayflowActor", zio.actors.Supervisor.none, (), paymentGatewayflowActor))
@@ -22,7 +22,7 @@ object ThreatreActor {
             bookingSyncActor <- actorSystem.flatMap(x => x.make("bookingSyncActor", zio.actors.Supervisor.none, (), bookingSyncActor))
             _ <- bookingSyncActor ! BookingMessage(ticketConfirm)
           }yield {
-            println("Completed Theatre Actor")
+            ZIO.logInfo("Completed Theatre Actor")
             ((),())}
 
         }

@@ -17,7 +17,7 @@ object BookingSyncActor {
       _ <- ZIO.logInfo("Inputting Booking Details")
       _ <- put("BookingDetails", bookingValues).execute
       bookingDetailsSuccess <- get[Booking]("BookingDetails", PrimaryKey("uuid" -> bookingValues.uuid)).execute
-      _ <- zio.Console.printLine(s"Booking Details Captured $bookingDetailsSuccess")
+      _ <- ZIO.logInfo(s"Booking Details Captured $bookingDetailsSuccess")
     } yield ()
   }
 

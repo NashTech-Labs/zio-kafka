@@ -6,7 +6,7 @@ import zio.schema.{DeriveSchema, Schema}
 sealed trait ZioMessage[+_]
 case class BookingMessage(msg: Booking) extends ZioMessage[Unit]
 case class Booking(uuid: String, bookingDate: String, theatreName: String,
-                   theatreLocation: String, seatNumbers: String, cardNumber: Int, pin: Int, cvv: Int, otp: Int, paymentStatus:Option[String], bookingStatus:Option[String])
+                   theatreLocation: String, movieName: String, showTimings: String,  seatNumbers: String, cardNumber: Int, pin: Int, cvv: Int, otp: Int, paymentStatus:Option[String], bookingStatus:Option[String])
 
 object Booking {
   implicit lazy val schema: Schema[Booking] = DeriveSchema.gen[Booking]

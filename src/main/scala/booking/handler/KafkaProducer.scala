@@ -6,12 +6,12 @@ import kafka.zio.KafkaTopics
 import org.apache.kafka.clients.producer.ProducerRecord
 import zio.kafka.producer.Producer
 import zio.stream.ZStream
-import zio.{Clock, Random}
+import zio.{Clock, Random, ZIO}
 
 object KafkaProducer {
 
   def producerRun(booking: Booking) = {
-    println("data ...." + booking)
+    ZIO.logInfo("data ...." + booking)
     ZStream
       .repeatZIO(Random.nextUUID <*> Clock.currentDateTime)
       .map { case (_, time) =>

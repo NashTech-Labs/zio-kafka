@@ -3,7 +3,7 @@ package booking.actor.system
 import booking.model.BookingMessageSerde
 import kafka.zio.{KafkaProdConsLayer, KafkaTopics}
 import zio.kafka.consumer.{Consumer, Subscription}
-import zio.ZIOAppDefault
+import zio.{ZIO, ZIOAppDefault}
 
 object KafkaConsumerSpec extends ZIOAppDefault {
 
@@ -14,7 +14,7 @@ object KafkaConsumerSpec extends ZIOAppDefault {
         .plainStream(BookingMessageSerde.key, BookingMessageSerde.value)
         .tap { comRec =>
           val ticketBooking = comRec.value
-          zio.Console.printLine("Ticket Booking Response " + ticketBooking)
+          ZIO.logInfo("Ticket Booking Response " + ticketBooking)
         }
         .map(_.offset)
         .aggregateAsync(Consumer.offsetBatches)
