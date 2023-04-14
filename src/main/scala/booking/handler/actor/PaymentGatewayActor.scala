@@ -14,13 +14,13 @@ object PaymentGatewayActor {
         case BookingMessage(value) =>
           ZIO.logInfo("paymentInfo ................" + value)
           val booking = Booking(value.uuid, value.bookingDate, value.theatreName, value.theatreLocation, value.movieName, value.showTimings, value.seatNumbers, value.cardNumber, value.pin,
-            value.cvv, value.otp, Some("Success"), Some(""))
+            value.cvv, value.otp, Some("Success"), Some("Confirmed"))
           for {
             bookingSyncActor <- actorSystem.flatMap(x => x.make("bookingSyncActor", zio.actors.Supervisor.none, (), bookingSyncActor))
             //ZIO.succeed(booking)
           }yield{
             ZIO.logInfo("paymentInfo return................" + booking)
-            ( BookingMessage(booking), ())
+            ((), booking)
           }
 
         case _ => throw new Exception("Wrong value Input")

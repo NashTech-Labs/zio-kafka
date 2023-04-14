@@ -34,7 +34,7 @@ object BookingSyncActor {
               DynamoDBExecutor.live
             )
             _ <- KafkaProducer.producerRun(value)
-          }yield((),())
+          }yield((),value)
       }
   }
 }

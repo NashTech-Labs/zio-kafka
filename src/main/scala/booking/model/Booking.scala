@@ -4,7 +4,7 @@ import zio.json._
 import zio.schema.{DeriveSchema, Schema}
 
 sealed trait ZioMessage[+_]
-case class BookingMessage(msg: Booking) extends ZioMessage[Unit]
+case class BookingMessage(msg: Booking) extends ZioMessage[Booking]
 case class Booking(uuid: String, bookingDate: String, theatreName: String,
                    theatreLocation: String, movieName: String, showTimings: String,  seatNumbers: String, cardNumber: Int, pin: Int, cvv: Int, otp: Int, paymentStatus:Option[String], bookingStatus:Option[String])
 
